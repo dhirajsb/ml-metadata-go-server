@@ -219,7 +219,7 @@ func (g grpcServer) PutArtifacts(ctx context.Context, request *proto.PutArtifact
 		nilSafeCopy(&value.State, artifact.State, artifactStateToInt64)
 		// create in DB
 		if err = dbConn.Create(value).Error; err != nil {
-			err = fmt.Errorf("error creating artifact with type_id[%d], name[%s]: %w", value.TypeID, value.Name, err)
+			err = fmt.Errorf("error creating artifact with type_id[%d], name[%s]: %w", value.TypeID, *value.Name, err)
 			return nil, err
 		}
 		// create properties in DB
